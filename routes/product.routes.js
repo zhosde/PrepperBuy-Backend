@@ -6,14 +6,15 @@ const Product = require("../models/Product.model");
 
 // POST route => to create a new product
 router.post("/products", (req, res, next) => {
-  const { name, description, category, image, price, stocked } = req.body;
+  const { name, description, category, image, price, qty, stocked } = req.body;
 
-  Project.create({
+  Product.create({
     name,
     description,
     category,
     image,
     price,
+    qty,
     stocked,
   })
     .then((response) => res.json(response))
@@ -36,7 +37,7 @@ router.get("/products/:productId", (req, res, next) => {
     return;
   }
 
-  Product.findById(projectId)
+  Product.findById(productId)
     .then((product) => res.status(200).json(product))
     .catch((error) => res.json(error));
 });
@@ -50,7 +51,7 @@ router.put("/products/:productId", (req, res, next) => {
     return;
   }
 
-  Product.findByIdAndUpdate(produtId, req.body)
+  Product.findByIdAndUpdate(productId, req.body)
     .then(() =>
       res.json({
         message: `Product with ${productId} is updated successfully.`,

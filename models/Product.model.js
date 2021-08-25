@@ -7,7 +7,8 @@ const productSchema = new Schema({
   category: String,
   image: String,
   price: Number,
-  stocked: true,
+  qty: { type: Number, default: 1 },
+  stocked: {type: Boolean, default: true}
 });
 
 module.exports = model("Product", productSchema);

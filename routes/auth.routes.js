@@ -100,6 +100,7 @@ router.post("/logout", (req, res, next) => {
   res.status(200).json({ message: "Log out success!" });
 });
 
+// check whether user in session and identify
 router.get("/loggedin", (req, res, next) => {
   // req.isAuthenticated() is defined by passport
   if (req.isAuthenticated()) {

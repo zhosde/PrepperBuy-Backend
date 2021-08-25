@@ -7,15 +7,16 @@ const User = require("../models/User.model");
 
 // POST route => to create an order
 router.post("/orders", (req, res, next) => {
-  const { items, totalPrice, qty } = req.body;
-  const { user } = req.user._id;
-
   Order.create({
     items: [],
-    qty,
-    totalPrice,
-    user,
+    totalPrice: req.body.totalPrice,
+    user: req.user._id,
   })
+    .then((createdOrderFromDB) => {
+      return User.findByIdAndUpdate(req.user._id, {
+        $push: { orders: createdOrderFromDB._id },
+      });
+    })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
