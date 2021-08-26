@@ -2,31 +2,40 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
-const Order = require("../models/order.model");
+const Order = require("../models/Order.model");
 const User = require("../models/User.model");
+const Product = require("../models/Product.model");
 
 // POST route => to create an order
 router.post("/orders", (req, res, next) => {
-  // find all the products from the order
-  Product.find()
+  // pass multiple product IDs to find all the products from the order
+  Product.find({
+    _id: { $in: req.body.items.map((item) => item.productID) },
+  })
     .then((productsFromDB) => {
-      // get the item-list in which the item with price from DB
-      const itemList = req.body.items.map((item) => {
-        item.purchasePrice = productsFromDB.findById(item._id).price;
-        return item;
+      // get the array list of purchased items
+      const itemList = req.body.items.map((itemObj) => {
+        // set the price from DB to purchased item
+        itemObj.purchasePrice = productsFromDB.find(
+          (singleItem) => singleItem._id == itemObj.productID
+        ).price;
+        return itemObj;
       });
-      return itemList;
+      
+      return Order.create({
+        items: itemList,
+        user: req.body.user,
+        // user: req.user._id,
+      });
     })
-    .then(
-      Order.create({
-        items: [],
-        user: req.user._id,
-      }).then((createdOrderFromDB) => {
-        return User.findByIdAndUpdate(req.user._id, {
-          $push: { orders: createdOrderFromDB._id },
-        });
-      })
-    )
+    .then((createdOrderFromDB) => {
+      console.log(" **** createdOrderFromDB **** ");
+      console.log(createdOrderFromDB);
+
+      return User.findByIdAndUpdate(req.body.user, {
+        $push: { orders: createdOrderFromDB._id },
+      });
+    })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
