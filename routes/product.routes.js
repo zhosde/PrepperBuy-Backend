@@ -6,7 +6,7 @@ const Product = require("../models/Product.model");
 
 // POST route => to create a new product
 router.post("/products", (req, res, next) => {
-  const { name, description, category, image, price, qty, stocked } = req.body;
+  const { name, description, category, image, price, stocked } = req.body;
 
   Product.create({
     name,
@@ -14,7 +14,6 @@ router.post("/products", (req, res, next) => {
     category,
     image,
     price,
-    qty,
     stocked,
   })
     .then((response) => res.json(response))

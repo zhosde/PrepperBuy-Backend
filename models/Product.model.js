@@ -7,7 +7,6 @@ const productSchema = new Schema({
   category: String,
   image: String,
   price: Number,
-  qty: { type: Number, default: 1 },
   stocked: {type: Boolean, default: true}
 });
 

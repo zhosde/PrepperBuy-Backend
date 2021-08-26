@@ -3,9 +3,13 @@ const { Schema, model } = mongoose;
 
 const orderSchema = new Schema(
   {
-    items: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+    items: [
+      {
+        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+        qty: { type: Number, default: 1 },
+      },
+    ],
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    totalPrice: Number,
   },
   {
     timestamps: true,

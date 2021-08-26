@@ -7,16 +7,26 @@ const User = require("../models/User.model");
 
 // POST route => to create an order
 router.post("/orders", (req, res, next) => {
-  Order.create({
-    items: [],
-    totalPrice: req.body.totalPrice,
-    user: req.user._id,
-  })
-    .then((createdOrderFromDB) => {
-      return User.findByIdAndUpdate(req.user._id, {
-        $push: { orders: createdOrderFromDB._id },
+  // find all the products from the order
+  Product.find()
+    .then((productsFromDB) => {
+      // get the item-list in which the item with price from DB
+      const itemList = req.body.items.map((item) => {
+        item.purchasePrice = productsFromDB.findById(item._id).price;
+        return item;
       });
+      return itemList;
     })
+    .then(
+      Order.create({
+        items: [],
+        user: req.user._id,
+      }).then((createdOrderFromDB) => {
+        return User.findByIdAndUpdate(req.user._id, {
+          $push: { orders: createdOrderFromDB._id },
+        });
+      })
+    )
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
