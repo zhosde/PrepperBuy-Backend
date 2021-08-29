@@ -24,15 +24,15 @@ router.post("/orders", (req, res, next) => {
       
       return Order.create({
         items: itemList,
-        user: req.body.user,
-        // user: req.user._id,
+        // user: req.body.user,
+        user: req.user._id,
       });
     })
     .then((createdOrderFromDB) => {
       console.log(" **** createdOrderFromDB **** ");
       console.log(createdOrderFromDB);
 
-      return User.findByIdAndUpdate(req.body.user, {
+      return User.findByIdAndUpdate(req.user._id, {
         $push: { orders: createdOrderFromDB._id },
       });
     })

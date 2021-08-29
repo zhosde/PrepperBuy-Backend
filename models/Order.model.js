@@ -11,6 +11,7 @@ const orderSchema = new Schema(
       },
     ],
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    // status: {type: String, enum: ["pending", "confirmed"], default: "pending"}
   },
   {
     timestamps: true,

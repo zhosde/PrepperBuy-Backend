@@ -21,6 +21,9 @@ const path = require("path");
 
 // Middleware configuration
 module.exports = (app) => {
+
+  app.set("trust proxy", 1);
+
   // In development environment the app logs
   app.use(logger("dev"));
 
@@ -32,7 +35,7 @@ module.exports = (app) => {
   app.use(
     cors({
       credentials: true,
-      origin: ["http://localhost:3000"], 
+      origin: process.env.ORIGIN || "http://localhost:3000",
     })
   );
 

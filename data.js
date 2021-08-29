@@ -4,7 +4,6 @@ export default {
       category: "Gear",
       description: "very useful knife",
       price: 19.99,
-      qty: 1,
       stocked: true,
       name: "Tactical Knife",
       image:
@@ -15,7 +14,6 @@ export default {
       category: "Gear",
       description: "very useful backpack",
       price: 49.99,
-      qty: 1,
       stocked: true,
       name: "Tactical Backpack",
       image: "https://m.media-amazon.com/images/I/81tPmHRDNFS._AC_SL1500_.jpg",
@@ -25,7 +23,6 @@ export default {
       category: "Gear",
       description: "very useful jacket",
       price: 79.99,
-      qty: 1,
       stocked: false,
       name: "Field Jacket",
       image:
@@ -36,7 +33,6 @@ export default {
       category: "Gear",
       description: "very useful scarf",
       price: 59.99,
-      qty: 1,
       stocked: true,
       name: "Scarf",
       image:
@@ -47,7 +43,6 @@ export default {
       category: "Electronics",
       description: "very useful radio",
       price: 39.99,
-      qty: 1,
       stocked: true,
       name: "Portable Radio",
       image:
@@ -58,7 +53,6 @@ export default {
       category: "Electronics",
       description: "very useful flashlight",
       price: 9.99,
-      qty: 1,
       stocked: false,
       name: "Hand Crank",
       image:
