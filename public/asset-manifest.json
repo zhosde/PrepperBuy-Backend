@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.56431ef7.chunk.css",
+    "main.js": "/static/js/main.9626c68e.chunk.js",
+    "main.js.map": "/static/js/main.9626c68e.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.65fe9905.js",
+    "runtime-main.js.map": "/static/js/runtime-main.65fe9905.js.map",
+    "static/css/2.847439e0.chunk.css": "/static/css/2.847439e0.chunk.css",
+    "static/js/2.0a295aa2.chunk.js": "/static/js/2.0a295aa2.chunk.js",
+    "static/js/2.0a295aa2.chunk.js.map": "/static/js/2.0a295aa2.chunk.js.map",
+    "static/js/3.c4c2b266.chunk.js": "/static/js/3.c4c2b266.chunk.js",
+    "static/js/3.c4c2b266.chunk.js.map": "/static/js/3.c4c2b266.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.847439e0.chunk.css.map": "/static/css/2.847439e0.chunk.css.map",
+    "static/css/main.56431ef7.chunk.css.map": "/static/css/main.56431ef7.chunk.css.map",
+    "static/js/2.0a295aa2.chunk.js.LICENSE.txt": "/static/js/2.0a295aa2.chunk.js.LICENSE.txt",
+    "static/media/let me open my bunker.413976c1.gif": "/static/media/let me open my bunker.413976c1.gif",
+    "static/media/main-logo.7fabedc8.png": "/static/media/main-logo.7fabedc8.png",
+    "static/media/starter-pack.8c2737db.jpeg": "/static/media/starter-pack.8c2737db.jpeg",
+    "static/media/tibet-namtso.80365fc8.jpg": "/static/media/tibet-namtso.80365fc8.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.65fe9905.js",
+    "static/css/2.847439e0.chunk.css",
+    "static/js/2.0a295aa2.chunk.js",
+    "static/css/main.56431ef7.chunk.css",
+    "static/js/main.9626c68e.chunk.js"
+  ]
+}
