@@ -24,11 +24,25 @@ const app = express();
 
 // Session settings: allows app to maintain the sessions 
 // and the users in it
+
+
+// app.use(
+//   session({
+//     secret: "some secret goes here",
+//     resave: true,
+//     saveUninitialized: false,
+//   })
+// );
+
 app.use(
   session({
-    secret: "some secret goes here",
+    secret: process.env.SESSION_SECRET || "very secret stuff",
     resave: true,
     saveUninitialized: false,
+    cookie: {
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // must be 'none' to enable cross-site delivery
+      secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
+    },
   })
 );
 
