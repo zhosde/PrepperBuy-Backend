@@ -8,30 +8,37 @@ const Product = require("../models/Product.model");
 
 // POST route => to create an order
 router.post("/orders", (req, res, next) => {
+
+  // convert req.body object into json array
+  const itemsArr = Object.keys(req.body.items).map((productID) => {
+    return {
+      productID,
+      qty: req.body.items[productID],
+    };
+  });
+
   // pass multiple product IDs to find all the products from the order
   Product.find({
-    _id: { $in: req.body.items.map((item) => item.productID) },
+    _id: { $in: itemsArr.map((item) => item.productID) },
   })
     .then((productsFromDB) => {
       // get the array list of purchased items
-      const itemList = req.body.items.map((itemObj) => {
+      const itemsArrWithPurchasePrice = itemsArr.map((itemObj) => {
         // set the price from DB to purchased item
         itemObj.purchasePrice = productsFromDB.find(
           (singleItem) => singleItem._id == itemObj.productID
         ).price;
         return itemObj;
       });
-      
+      return itemsArrWithPurchasePrice;
+    })
+    .then((itemsArrWithPurchasePrice) => {
       return Order.create({
-        items: itemList,
-        // user: req.body.user,
+        items: itemsArrWithPurchasePrice,
         user: req.user._id,
       });
     })
     .then((createdOrderFromDB) => {
-      console.log(" **** createdOrderFromDB **** ");
-      console.log(createdOrderFromDB);
-
       return User.findByIdAndUpdate(req.user._id, {
         $push: { orders: createdOrderFromDB._id },
       });
