@@ -41,7 +41,6 @@ app.use(
     secret: process.env.SESSION_SECRET || "very secret stuff",
     resave: true,
     saveUninitialized: false,
-    proxy: true,
     cookie: {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // must be 'none' to enable cross-site delivery
       secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
