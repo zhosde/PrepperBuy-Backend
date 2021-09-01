@@ -47,6 +47,18 @@ router.post("/orders", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+// GET route => to retrieve all the orders of the user
+router.get('/orders/summary', (req,res,next) => {
+  userId = req.user._id
+  User.findById(userId)
+  .then((theUser) => {
+    const ordersArr = theUser.orders
+    return ordersArr
+  })
+  .then((response)=> res.json(response))
+  .catch((err)=> res.json(err))
+})
+
 // GET route => to retrieve the order
 router.get("/orders/:orderId", (req, res, next) => {
   const { orderId } = req.params;
