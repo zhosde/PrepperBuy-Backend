@@ -45,8 +45,21 @@ router.post("/signup", (req, res, next) => {
       console.log("Newly created user is: ", userFromDB);
       // Send the user's information to the frontend
       // res.status(200).json(req.user);
-      res.status(200).json(userFromDB);
+
+      // res.status(200).json(userFromDB);
+
+
+      req.login(userFromDB, (err) => {
+        if (err) {
+          res.status(500).json({ message: "Session save went bad." });
+          return;
+        }
+        // logged in (can also send req.user)
+        res.status(200).json(userFromDB);
+      });
     })
+
+    
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
         res.status(500).json({ errorMessage: error.message });
